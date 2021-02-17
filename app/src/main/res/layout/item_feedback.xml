@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.uni.data.models.Feedback" />
+
+
+        <import type="com.uni.customer.common.DateUtils" />
+
+        <variable
+            name="data"
+            type="com.uni.data.models.Feedback" />
+    </data>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_feedback"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:elevation="1dp"
+            android:background="@color/white"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="13dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/tvOrderIdHead"
+                android:text="Order ID"
+                style="@style/Text.R4"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_ID"
+                style="@style/Text.R3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.order_id}"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvOrderIdHead"
+                tools:text="373737" />
+            <TextView
+                android:layout_width="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/tvNameHead"
+                android:text="Customer Name"
+                style="@style/Text.R4"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                tools:text="Kumar Busem"
+                style="@style/Text.R3"
+                android:id="@+id/tvDateTime"
+                android:textColor="@color/colorPrimary"
+                android:text="@{data.customer_name}"
+                app:layout_constraintTop_toBottomOf="@id/tvNameHead"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
