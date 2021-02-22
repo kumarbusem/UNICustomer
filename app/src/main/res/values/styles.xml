@@ -3,22 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="windowActionModeOverlay">true</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="colorPrimaryDark">@color/whiteGreen</item>
         <item name="fontPath">fonts/WorkSans-Regular.ttf</item>
-    </style>
+        <item name="android:statusBarColor">@color/whiteGreen</item>
+        <item name="android:windowLightStatusBar">true</item>
 
-    <style name="NormalTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="windowActionModeOverlay">false</item>
-        <item name="android:windowActionBarOverlay">false</item>
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:windowTranslucentNavigation">false</item>
-        <item name="colorPrimaryDark">@color/whiteGreen</item>
-        <item name="fontPath">fonts/WorkSans-Regular.ttf</item>
     </style>
 
     <!--BOLD FONTS-->
@@ -46,7 +34,6 @@
     </style>
 
     <!--TABLET FONTS-->
-
 
     <!--REGULAR FONTS-->
     <style name="Text.ActionBar.Title" parent="Text.B2">
@@ -81,7 +68,6 @@
     </style>
 
     <!--TABLET FONTS-->
-
 
     <!--LIGHT FONTS-->
 
