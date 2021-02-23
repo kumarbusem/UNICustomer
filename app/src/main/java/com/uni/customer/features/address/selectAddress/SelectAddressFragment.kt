@@ -49,6 +49,8 @@ class SelectAddressFragment :  BaseAbstractFragment<SelectAddressViewModel, Frag
                 else
                     setDestinationAddress(PlaceDetails(place.name, place.address, place.latLng))
 
+                mViewModel.setSavedAddress(place)
+
                 navigateBack()
             }
 

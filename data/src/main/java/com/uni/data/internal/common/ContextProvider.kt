@@ -4,20 +4,19 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
+import android.util.Log
 import com.google.firebase.FirebaseApp
+import com.uni.data.dataSources.roomDatabase.UniRoomDatabase
 
 
 internal class ContextProvider : ContentProvider() {
 
     override fun onCreate(): Boolean {
-
-//        val settings = FirebaseFirestoreSettings.Builder().setPersistenceEnabled(false).build()
-//        FirebaseFirestore.getInstance().firestoreSettings = settings
-//        Log.e("**IS PERSITENCE ENABLED", FirebaseFirestore.getInstance().firestoreSettings.isPersistenceEnabled.toString())
-
         context?.let { context ->
+            Log.e("Context Provider::", "111")
             FirebaseApp.initializeApp(context)
             SharedPreferenceHelper.initialize(context)
+            UniRoomDatabase.initialize(context)
             return true
         }
         return false
