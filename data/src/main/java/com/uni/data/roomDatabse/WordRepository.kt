@@ -1,7 +1,6 @@
-package com.uni.customer.roomDatabse
+package com.uni.data.roomDatabse
 
 import androidx.annotation.WorkerThread
-import kotlinx.coroutines.flow.Flow
 
 class WordRepository(private val wordDao: WordDao) {
 

@@ -1,4 +1,4 @@
-package com.uni.customer.roomDatabse
+package com.uni.data.roomDatabse
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

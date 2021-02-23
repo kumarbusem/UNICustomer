@@ -1,4 +1,4 @@
-package com.uni.customer.roomDatabse
+package com.uni.data.roomDatabse
 
 import android.content.Context
 import androidx.room.Database
