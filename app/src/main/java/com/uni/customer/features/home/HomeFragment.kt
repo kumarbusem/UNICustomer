@@ -21,7 +21,7 @@ import com.google.maps.model.*
 import com.uni.customer.R
 import com.uni.customer.common.*
 import com.uni.customer.databinding.FragmentHomeBinding
-import com.uni.data.models.PlaceDetails
+import com.uni.data.roomDatabase.RecentAddress
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_runsheets.*
 import java.io.IOException
@@ -63,29 +63,31 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
-        googleMap?.clear()
-        doBasicThings(googleMap)
-        pickupMarker?.remove()
-        destinationMarker?.remove()
 
-        getPickupAddress { pickupPlace ->
-            if (pickupPlace == null) {
-                initFreshMap(googleMap)
-            } else {
-                initPickupMap(googleMap, pickupPlace)
-                getDestinationAddress { destinationPlace ->
-                    if(destinationPlace != null){
-                        initDestinationMap(googleMap, pickupPlace, destinationPlace)
+        if (googleMap != null) {
+            googleMap.clear()
+            doBasicThings(googleMap)
+            pickupMarker?.remove()
+            destinationMarker?.remove()
+            getPickupAddress { pickupPlace ->
+                if (pickupPlace == null) {
+                    initFreshMap(googleMap)
+                } else {
+                    initPickupMap(googleMap, pickupPlace)
+                    getDestinationAddress { destinationPlace ->
+                        if (destinationPlace != null) {
+                            initDestinationMap(googleMap, pickupPlace, destinationPlace)
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun initDestinationMap(googleMap: GoogleMap?, pickupPlace: PlaceDetails, destinationPlace: PlaceDetails) {
+    private fun initDestinationMap(googleMap: GoogleMap, pickupPlace: RecentAddress?, destinationPlace: RecentAddress?) {
 
-        destinationMarker = googleMap?.addMarker(MarkerOptions()
-                .position(destinationPlace.latLng!!)
+        destinationMarker = googleMap.addMarker(MarkerOptions()
+                .position(destinationPlace?.getLatlngsFromRecentAddress()!!)
                 .title("End Point")
                 .icon(BitmapDescriptorFactory
                         .fromResource(R.drawable.orange_marker)))
@@ -100,16 +102,16 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
         }
     }
 
-    private fun initPickupMap(googleMap: GoogleMap?, place: PlaceDetails) {
-        googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(place.latLng, 18.toFloat()))
+    private fun initPickupMap(googleMap: GoogleMap?, place: RecentAddress?) {
+        googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(place?.getLatlngsFromRecentAddress()!!, 18.toFloat()))
         googleMap?.setOnCameraIdleListener {}
         mBinding.ivPickupCentreMarker.hide()
         pickupMarker = googleMap?.addMarker(MarkerOptions()
-                .position(place.latLng!!)
+                .position(place?.getLatlngsFromRecentAddress()!!)
                 .title("Start Point")
                 .icon(BitmapDescriptorFactory
                         .fromResource(R.drawable.green_marker)))
-        mBinding.pickupText.text = "${place.name}, ${place.address}"
+        mBinding.pickupText.text = "${place?.name}, ${place?.address}"
     }
 
     private fun doBasicThings(googleMap: GoogleMap?) {
@@ -137,8 +139,9 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
                 val address = addresses[0].getAddressLine(0).toString()
                 mBinding.pickupText.text = address
 
-                setPickupAddress(PlaceDetails(address.substring(0, address.indexOf(",")),
-                        address.substring(address.indexOf(",") + 1, address.length), latLng))
+                setPickupAddress(RecentAddress(address.substring(0, address.indexOf(",")),
+                        address.substring(address.indexOf(",") + 1, address.length), latLng.latitude,
+                        latLng.longitude, getCurrentDateInServerFormat()))
 
             } else {
                 mBinding.pickupText.text = "Searching Current Address"
@@ -148,16 +151,18 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
             Log.e("ERROR::", e.printStackTrace().toString())
         }
     }
+
     private fun showMylocationOnCamera(googleMap: GoogleMap?) {
         getLocation(requireContext()) {
-            googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it?.latitude!!, it.longitude), 16.toFloat()))
+            if (it != null)
+                googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 16.toFloat()))
         }
     }
 
-    private fun loadRoute(mMap: GoogleMap?, pickupPlace: PlaceDetails, destinationPlace: PlaceDetails) {
+    private fun loadRoute(mMap: GoogleMap?, pickupPlace: RecentAddress?, destinationPlace: RecentAddress?) {
 
-        val barcelona = pickupPlace.latLng
-        val madrid = destinationPlace.latLng
+        val barcelona = pickupPlace?.getLatlngsFromRecentAddress()
+        val madrid = destinationPlace?.getLatlngsFromRecentAddress()
 
         //Define list to get all latlng for the route
 
@@ -224,7 +229,7 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
             mMap?.addPolyline(opts)
         }
 
-        val bc = LatLngBounds.Builder().include(pickupPlace.latLng).include(destinationPlace.latLng)
+        val bc = LatLngBounds.Builder().include(pickupPlace?.getLatlngsFromRecentAddress()).include(destinationPlace?.getLatlngsFromRecentAddress())
         mMap?.setPadding(0, 0, 0, 0)
         mMap?.moveCamera(CameraUpdateFactory.newLatLngBounds(
                 bc.build(),
@@ -232,6 +237,7 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
                 (this.resources.displayMetrics.heightPixels * 0.5).toInt(),
                 100))
     }
+
     override fun onResume() {
         initLoation(requireActivity(), requireContext())
         super.onResume()

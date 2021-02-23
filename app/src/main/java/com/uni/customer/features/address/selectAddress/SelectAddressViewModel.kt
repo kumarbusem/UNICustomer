@@ -2,20 +2,18 @@ package com.uni.customer.features.address.selectAddress
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.libraries.places.api.model.Place
 import com.uni.customer.common.BaseViewModel
 import com.uni.customer.common.getCurrentDateInServerFormat
-import com.uni.customer.roomDatabse.Word
-import com.uni.customer.roomDatabse.WordRepository
-import com.uni.customer.roomDatabse.WordRoomDatabase
+import com.uni.data.models.Runsheet
+import com.uni.data.roomDatabase.RecentAddress
 import kotlinx.coroutines.launch
 
 class SelectAddressViewModel(context: Application) : BaseViewModel(context) {
 
-    val obsSavedAddressList: MutableLiveData<List<Word>> = MutableLiveData()
-
+    val obsSavedAddressList: MutableLiveData<List<RecentAddress>> = MutableLiveData()
+    val obsRunsheetssList: MutableLiveData<List<Runsheet>> = MutableLiveData()
     init {
         getSavedAddress()
     }
@@ -24,11 +22,11 @@ class SelectAddressViewModel(context: Application) : BaseViewModel(context) {
 
         ioScope.launch {
             try {
-                val allWords: List<Word> = repository.allWords
-                allWords.forEach {
-                    Log.e("WORDS::", it.word.toString())
+                val allRecentAddresses: List<RecentAddress> = repository.allRecentAddresses
+                allRecentAddresses.forEach {
+                    Log.e("WORDS::", it.name.toString())
                 }
-                obsSavedAddressList.postValue(allWords)
+                obsSavedAddressList.postValue(allRecentAddresses)
             } catch (e: Exception) {
                 obsMessage.postValue(e.message + "")
                 obsSavedAddressList.postValue(null)
@@ -39,7 +37,8 @@ class SelectAddressViewModel(context: Application) : BaseViewModel(context) {
 
     fun setSavedAddress(place: Place){
         ioScope.launch {
-            repository.insert(Word(place.name.toString()))
+            repository.insert(RecentAddress(place.name.toString(), place.address.toString(),
+                    place.latLng?.latitude!!, place.latLng?.longitude!!, getCurrentDateInServerFormat()))
         }
     }
 

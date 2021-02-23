@@ -10,8 +10,8 @@ import com.google.android.libraries.places.api.model.Place
 import com.uni.data.dataSources.definitions.DataSourceSharedPreferences
 import com.uni.data.dataSources.repos.RepoSharedPreferences
 import com.uni.customer.MainActivity
-import com.uni.data.models.PlaceDetails
 import com.uni.data.models.Settings
+import com.uni.data.roomDatabase.RecentAddress
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -46,10 +46,10 @@ open class BaseFragment : Fragment() {
         mActivity.setBottomBarVisibility(shouldDisplay)
     }
 
-    protected fun setPickupAddress(place: PlaceDetails?) {
+    protected fun setPickupAddress(place: RecentAddress?) {
         mActivity.setPickupAddress(place)
     }
-    protected fun setDestinationAddress(place: PlaceDetails?) {
+    protected fun setDestinationAddress(place: RecentAddress?) {
         mActivity.setDestinationAddress(place)
     }
 
@@ -58,8 +58,8 @@ open class BaseFragment : Fragment() {
     }
 
     protected fun getSelectAddreddFor() = mActivity.getSelectAddressFor()
-    protected fun getPickupAddress(res: (PlaceDetails?) -> Unit) = mActivity.getPickupAddress(res)
-    protected fun getDestinationAddress(res: (PlaceDetails?) -> Unit) = mActivity.getDestinationAddress(res)
+    protected fun getPickupAddress(res: (RecentAddress?) -> Unit) = mActivity.getPickupAddress(res)
+    protected fun getDestinationAddress(res: (RecentAddress?) -> Unit) = mActivity.getDestinationAddress(res)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

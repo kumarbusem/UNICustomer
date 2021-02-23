@@ -3,6 +3,7 @@ package com.uni.customer.features.address.selectAddress
 
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -11,12 +12,15 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.uni.customer.R
 import com.uni.customer.common.*
 import com.uni.customer.databinding.FragmentSelectAddressBinding
-import com.uni.data.models.PlaceDetails
+import com.uni.data.roomDatabase.RecentAddress
 import java.util.*
 
 
-class SelectAddressFragment :  BaseAbstractFragment<SelectAddressViewModel, FragmentSelectAddressBinding>(R.layout.fragment_select_address) {
-
+class SelectAddressFragment :  BaseAbstractFragment<SelectAddressViewModel, FragmentSelectAddressBinding>(R.layout.fragment_select_address),
+RecentAddressListAdapter.ItemSelectionCallback{
+    private val mAdapter: RecentAddressListAdapter by lazy {
+        RecentAddressListAdapter(this@SelectAddressFragment)
+    }
     override fun setViewModel(): SelectAddressViewModel =
             ViewModelProvider(this@SelectAddressFragment, ViewModelFactory {
                 SelectAddressViewModel(requireActivity().application)
@@ -25,6 +29,12 @@ class SelectAddressFragment :  BaseAbstractFragment<SelectAddressViewModel, Frag
     override fun setupViews(): FragmentSelectAddressBinding.() -> Unit = {
 
         toggleBottomBarVisibility(false)
+
+        rvRecentAddressList.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = mAdapter
+        }
+
         ivBack.setOnClickListener { navigateBack() }
         initPlaceAutoComplete()
 
@@ -45,9 +55,11 @@ class SelectAddressFragment :  BaseAbstractFragment<SelectAddressViewModel, Frag
             override fun onPlaceSelected(place: Place) {
 
                 if(getSelectAddreddFor() == SELECT_ADDRESS_FOR_PICKUP)
-                    setPickupAddress(PlaceDetails(place.name, place.address, place.latLng))
+                    setPickupAddress(RecentAddress(place.name!!, place.address!!, place.latLng?.latitude!!,
+                            place.latLng?.longitude!!, getCurrentDateInServerFormat()))
                 else
-                    setDestinationAddress(PlaceDetails(place.name, place.address, place.latLng))
+                    setDestinationAddress(RecentAddress(place.name!!, place.address!!, place.latLng?.latitude!!,
+                            place.latLng?.longitude!!, getCurrentDateInServerFormat()))
 
                 mViewModel.setSavedAddress(place)
 
@@ -60,6 +72,24 @@ class SelectAddressFragment :  BaseAbstractFragment<SelectAddressViewModel, Frag
         })
     }
     override fun setupObservers(): SelectAddressViewModel.() -> Unit = {
+       obsSavedAddressList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {list ->
+           if (list.isNullOrEmpty()) {
+               mAdapter.submitList(emptyList())
+           } else {
+               mAdapter.submitList(list.toMutableList())
+           }
 
+       })
+    }
+
+    override fun onSelectRunsheetClick(recentAddress: RecentAddress) {
+        if(getSelectAddreddFor() == SELECT_ADDRESS_FOR_PICKUP)
+            setPickupAddress(recentAddress)
+        else
+            setDestinationAddress(recentAddress)
+
+        navigateBack()
     }
 }
+
+

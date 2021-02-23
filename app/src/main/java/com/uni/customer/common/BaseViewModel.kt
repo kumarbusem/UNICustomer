@@ -3,8 +3,8 @@ package com.uni.customer.common
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.uni.customer.roomDatabse.WordRepository
-import com.uni.customer.roomDatabse.WordRoomDatabase
+import com.uni.data.roomDatabase.RecentAddressRepository
+import com.uni.data.roomDatabase.UNIRoomDatabase
 import com.uni.data.dataSources.definitions.DataSourceImage
 import com.uni.data.dataSources.definitions.DataSourceSharedPreferences
 import com.uni.data.dataSources.definitions.DataSourceTextData
@@ -13,7 +13,6 @@ import com.uni.data.dataSources.repos.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import okhttp3.internal.applyConnectionSpec
 
 open class BaseViewModel(context: Application) : AndroidViewModel(context) {
 
@@ -31,8 +30,8 @@ open class BaseViewModel(context: Application) : AndroidViewModel(context) {
     protected val repoTextData: DataSourceTextData by lazy { RepoTextData() }
     protected val repoImage: DataSourceImage by lazy { RepoImage() }
 
-    val database by lazy { WordRoomDatabase.getDatabase(context) }
-    val repository by lazy { WordRepository(database.wordDao()) }
+    val database by lazy { UNIRoomDatabase.getDatabase(context) }
+    val repository by lazy { RecentAddressRepository(database.recentAddressDao()) }
 
 
 

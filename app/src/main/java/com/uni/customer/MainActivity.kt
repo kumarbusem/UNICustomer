@@ -16,8 +16,8 @@ import com.google.android.libraries.places.api.model.Place
 import com.uni.data.dataSources.definitions.DataSourceFirestore
 import com.uni.data.dataSources.repos.RepoFirestore
 import com.uni.customer.common.*
-import com.uni.data.models.PlaceDetails
 import com.uni.data.models.Settings
+import com.uni.data.roomDatabase.RecentAddress
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     protected val repoFirestore: DataSourceFirestore by lazy { RepoFirestore() }
 
-    private var pickupAddress: PlaceDetails? = null
-    private var destinationAddress: PlaceDetails? = null
+    private var pickupAddress: RecentAddress? = null
+    private var destinationAddress: RecentAddress? = null
     private lateinit var selectAddressFor: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,16 +84,16 @@ class MainActivity : AppCompatActivity() {
                 View.VISIBLE else bottomNavigationViewLicker?.visibility = View.GONE
     }
 
-    fun setPickupAddress(address: PlaceDetails?) {
+    fun setPickupAddress(address: RecentAddress?) {
         pickupAddress = address
     }
-    fun setDestinationAddress(address: PlaceDetails?) {
+    fun setDestinationAddress(address: RecentAddress?) {
         destinationAddress = address
     }
-    fun getPickupAddress(res: (PlaceDetails?) -> Unit) {
+    fun getPickupAddress(res: (RecentAddress?) -> Unit) {
         res( pickupAddress)
     }
-    fun getDestinationAddress(res: (PlaceDetails?) -> Unit) {
+    fun getDestinationAddress(res: (RecentAddress?) -> Unit) {
         res( destinationAddress)
     }
 

@@ -9,6 +9,8 @@ import android.net.ConnectivityManager
 import android.util.Log
 import android.view.Display
 import com.google.android.gms.location.*
+import com.google.android.gms.maps.model.LatLng
+import com.uni.data.roomDatabase.RecentAddress
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.reflect.KProperty0
@@ -24,6 +26,9 @@ fun isNetworkAvailable(context: Context): Boolean {
     return activeNetworkInfo != null && activeNetworkInfo.isConnected
 }
 
+fun RecentAddress.getLatlngsFromRecentAddress(): LatLng{
+    return LatLng(this.lat, this.lng)
+}
 
 fun isGpsAvailable(context: Context): Boolean {
     val locationManager =
