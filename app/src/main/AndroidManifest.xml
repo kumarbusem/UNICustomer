@@ -47,6 +47,7 @@
             android:name="com.uni.data.internal.common.ContextProvider"
             android:authorities="${applicationId}.ContextProvider"
             android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.uni.customer.fileprovider"

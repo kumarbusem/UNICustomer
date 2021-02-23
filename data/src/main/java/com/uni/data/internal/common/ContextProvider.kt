@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.FirebaseApp
-import com.uni.data.dataSources.roomDatabase.UniRoomDatabase
 
 
 internal class ContextProvider : ContentProvider() {
@@ -16,7 +15,6 @@ internal class ContextProvider : ContentProvider() {
             Log.e("Context Provider::", "111")
             FirebaseApp.initializeApp(context)
             SharedPreferenceHelper.initialize(context)
-            UniRoomDatabase.initialize(context)
             return true
         }
         return false
