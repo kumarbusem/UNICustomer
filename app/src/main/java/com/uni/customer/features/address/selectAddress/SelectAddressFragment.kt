@@ -1,13 +1,7 @@
 package com.uni.customer.features.address.selectAddress
 
 
-import android.content.Context
-import android.os.Bundle
 import android.util.Log
-import android.view.ContextThemeWrapper
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
@@ -17,6 +11,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.uni.customer.R
 import com.uni.customer.common.*
 import com.uni.customer.databinding.FragmentSelectAddressBinding
+import com.uni.data.models.PlaceDetails
 import java.util.*
 
 
@@ -30,7 +25,7 @@ class SelectAddressFragment :  BaseAbstractFragment<SelectAddressViewModel, Frag
     override fun setupViews(): FragmentSelectAddressBinding.() -> Unit = {
 
         toggleBottomBarVisibility(false)
-
+        ivBack.setOnClickListener { navigateBack() }
         initPlaceAutoComplete()
 
     }
@@ -43,26 +38,26 @@ class SelectAddressFragment :  BaseAbstractFragment<SelectAddressViewModel, Frag
         var autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
 
         // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG))
 
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
 
-                Log.e("PLACE:::::", "Place: ${place.name}, ${place.id}")
+                if(getSelectAddreddFor() == SELECT_ADDRESS_FOR_PICKUP)
+                    setPickupAddress(PlaceDetails(place.name, place.address, place.latLng))
+                else
+                    setDestinationAddress(PlaceDetails(place.name, place.address, place.latLng))
+
+                navigateBack()
             }
 
             override fun onError(status: Status) {
-
                 Log.e("PLACE:::::", "An error occurred: $status")
             }
         })
-
     }
-
     override fun setupObservers(): SelectAddressViewModel.() -> Unit = {
 
     }
-
-
 }

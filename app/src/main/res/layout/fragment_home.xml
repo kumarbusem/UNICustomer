@@ -28,23 +28,25 @@
             class="com.google.android.gms.maps.SupportMapFragment" />
 
         <ImageView
-            android:layout_width="34dp"
+            android:layout_width="45sp"
+            android:id="@+id/ivPickupCentreMarker"
             android:layout_gravity="center"
+            android:layout_marginBottom="20sp"
             android:src="@drawable/green_marker"
-            android:layout_height="34dp"/>
+            android:layout_height="45sp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="40sp"
+                android:layout_width="46sp"
                 android:id="@+id/btnNotifications"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:cardCornerRadius="20sp"
+                app:cardCornerRadius="23sp"
                 android:layout_margin="20sp"
                 app:cardElevation="18sp"
-                android:layout_height="40sp">
+                android:layout_height="46sp">
                 <ImageView
                     android:layout_width="24sp"
                     android:layout_gravity="center"
@@ -56,7 +58,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="18sp"
+                android:layout_marginHorizontal="14sp"
                 app:layout_constraintTop_toBottomOf="@id/btnNotifications"
                 android:layout_marginTop="25sp"
                 app:cardCornerRadius="6sp"
@@ -65,86 +67,118 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14sp"
-                    android:layout_marginBottom="14sp"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/pickupCard"
                         android:layout_width="match_parent"
+                        android:paddingVertical="15sp"
+                        android:foreground="?selectableItemBackground"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="6sp"
-                        android:layout_marginRight="4sp"
+                        android:paddingStart="6sp"
+                        android:paddingEnd="4sp"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="14sp"
+                            android:layout_width="15sp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="14sp"
+                            android:id="@+id/ivPickup"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginLeft="10sp"
                             android:src="@drawable/green_dot_with_line" />
 
                         <TextView
                             android:id="@+id/pickup_text"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:paddingEnd="4sp"
-                            android:layout_marginLeft="14sp"
+                            app:layout_constraintTop_toTopOf="@id/ivPickup"
+                            app:layout_constraintBottom_toBottomOf="@id/ivPickup"
+                            app:layout_constraintStart_toEndOf="@id/ivPickup"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="6sp"
+                            android:layout_marginStart="14sp"
                             android:layout_marginTop="6dp"
                             android:layout_marginBottom="6dp"
                             android:maxLines="1"
                             android:text="Select Pickup location"
-                            android:textColor="#282828"
-                            android:textSize="13sp" />
-                    </LinearLayout>
+                            android:textColor="#101010"
+                            android:textSize="14sp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="2sp"
-                        android:layout_marginLeft="45sp"
-                        android:layout_marginTop="12sp"
-                        android:layout_marginRight="12sp"
-                        android:layout_marginBottom="12sp"
-                        android:background="#F6F6F6"
+                        android:background="#EDEFEF"
                         android:orientation="vertical">
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/destinationCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="6sp"
-                        android:layout_marginRight="4sp"
+                        android:foreground="?selectableItemBackground"
+                        android:paddingVertical="15sp"
+                        android:paddingStart="6sp"
+                        android:paddingEnd="4sp"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="14sp"
+                            android:layout_width="15sp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="14sp"
+                            android:layout_marginLeft="10sp"
+                            android:id="@+id/ivDestination"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             android:src="@drawable/destination_marker_select"
                             app:tint="@color/colorPrimary" />
 
                         <TextView
                             android:id="@+id/destination_text"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="14sp"
+                            android:layout_marginStart="14sp"
                             android:layout_marginTop="6dp"
-                            android:paddingEnd="4sp"
+                            android:paddingEnd="6sp"
+                            app:layout_constraintStart_toEndOf="@id/ivDestination"
+                            app:layout_constraintTop_toTopOf="@id/ivDestination"
+                            app:layout_constraintBottom_toBottomOf="@id/ivDestination"
                             android:layout_marginBottom="6dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="4sp"
                             android:maxLines="1"
                             android:text="Select Destination"
-                            android:textColor="#282828"
-                            android:textSize="13sp" />
-                    </LinearLayout>
+                            android:textColor="#101010"
+                            android:textSize="14sp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 </LinearLayout>
 
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="46sp"
+                android:id="@+id/btnMyLocation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="23sp"
+                android:layout_margin="20sp"
+                app:cardElevation="8sp"
+                android:layout_height="46sp">
+                <ImageView
+                    android:layout_width="24sp"
+                    android:layout_gravity="center"
+                    android:padding="2sp"
+                    android:src="@drawable/ic_baseline_my_location_24"
+                    android:layout_height="24sp"
+                    app:tint="@color/colorGrey600" />
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

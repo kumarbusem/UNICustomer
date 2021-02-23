@@ -12,9 +12,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.google.android.libraries.places.api.model.Place
 import com.uni.data.dataSources.definitions.DataSourceFirestore
 import com.uni.data.dataSources.repos.RepoFirestore
 import com.uni.customer.common.*
+import com.uni.data.models.PlaceDetails
+import com.uni.data.models.Settings
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
@@ -25,6 +28,10 @@ import kotlinx.android.synthetic.main.partial_blocked_version.view.*
 class MainActivity : AppCompatActivity() {
 
     protected val repoFirestore: DataSourceFirestore by lazy { RepoFirestore() }
+
+    private var pickupAddress: PlaceDetails? = null
+    private var destinationAddress: PlaceDetails? = null
+    private lateinit var selectAddressFor: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +84,25 @@ class MainActivity : AppCompatActivity() {
                 View.VISIBLE else bottomNavigationViewLicker?.visibility = View.GONE
     }
 
+    fun setPickupAddress(address: PlaceDetails?) {
+        pickupAddress = address
+    }
+    fun setDestinationAddress(address: PlaceDetails?) {
+        destinationAddress = address
+    }
+    fun getPickupAddress(res: (PlaceDetails?) -> Unit) {
+        res( pickupAddress)
+    }
+    fun getDestinationAddress(res: (PlaceDetails?) -> Unit) {
+        res( destinationAddress)
+    }
+
+    fun setSelectAddressFor(it: String) {
+        selectAddressFor = it
+    }
+
+    fun getSelectAddressFor(): String = selectAddressFor
+
     private val networkReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (isNetworkAvailable(this@MainActivity)) plNoInternet.hide()
@@ -88,7 +114,6 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         val networkIntentFilter = IntentFilter(CONNECTION)
         this.registerReceiver(networkReceiver, networkIntentFilter)
-
     }
 
     override fun onStop() {

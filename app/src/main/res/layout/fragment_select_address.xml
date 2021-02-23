@@ -17,19 +17,37 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clProjectDetails"
         android:layout_width="match_parent"
-        android:fitsSystemWindows="false"
         android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:fitsSystemWindows="false">
 
-        <fragment
-            android:id="@+id/autocomplete_fragment"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-            android:layout_width="match_parent"
-            android:minHeight="40sp"
-            android:layout_height="?actionBarSize"
-            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="60sp"
+            android:layout_height="0dp"
+            android:paddingHorizontal="20sp"
+            android:src="@drawable/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/cvSearch"
+            app:layout_constraintTop_toTopOf="@id/cvSearch" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="50sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="10sp"
+            app:cardElevation="3sp"
+            android:id="@+id/cvSearch"
+            android:layout_marginEnd="10sp"
+            android:layout_marginTop="10sp"
+            app:layout_constraintStart_toEndOf="@id/ivBack"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <fragment
+                android:id="@+id/autocomplete_fragment"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.card.MaterialCardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
