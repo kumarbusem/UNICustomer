@@ -17,9 +17,9 @@ public abstract class UniRoomDatabase : RoomDatabase() {
 
         fun initialize(context: Context) {
             if (instance == null) {
-                Room.databaseBuilder(
+                instance = Room.databaseBuilder(
                         context.applicationContext,
-                        RoomDatabase::class.java,
+                        UniRoomDatabase::class.java,
                         "word_database"
                 ).build()
             }
