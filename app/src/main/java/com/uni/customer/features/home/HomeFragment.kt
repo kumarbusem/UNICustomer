@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_runsheets.*
 import java.io.IOException
 import java.util.*
 
-class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback {
+class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private val mPermissionManager: PermissionManager by lazy { PermissionManager(this@HomeFragment) }
     private var pickupMarker: Marker? = null
     private var destinationMarker: Marker? = null
@@ -85,7 +85,7 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
     }
 
     private fun initDestinationMap(googleMap: GoogleMap, pickupPlace: RecentAddress?, destinationPlace: RecentAddress?) {
-
+        mBinding.cvFindTrucks.show()
         destinationMarker = googleMap.addMarker(MarkerOptions()
                 .position(destinationPlace?.getLatlngsFromRecentAddress()!!)
                 .title("End Point")
@@ -118,7 +118,7 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return
         }
-
+        googleMap?.setOnMarkerClickListener(this)
         googleMap?.isMyLocationEnabled = false
         googleMap?.uiSettings?.isCompassEnabled = false
         googleMap?.uiSettings?.isMyLocationButtonEnabled = false
@@ -242,5 +242,17 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
     override fun onResume() {
         initLoation(requireActivity(), requireContext())
         super.onResume()
+    }
+
+    override fun onMarkerClick(marker: Marker?): Boolean {
+        Log.e("MARKER CLICK", marker.toString())
+        if(marker == pickupMarker){
+            setSelectAddreddFor(SELECT_ADDRESS_FOR_PICKUP)
+            navigateById(R.id.action_homeFragment_to_selectAddressFragment)
+        }else if(marker== destinationMarker){
+                setSelectAddreddFor(SELECT_ADDRESS_FOR_DESTINATION)
+                navigateById(R.id.action_homeFragment_to_selectAddressFragment)
+        }
+        return true
     }
 }

@@ -42,9 +42,10 @@
                 android:layout_width="46sp"
                 android:id="@+id/btnNotifications"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnMyLocation"
                 app:cardCornerRadius="23sp"
-                android:layout_margin="20sp"
+                android:layout_marginVertical="20sp"
+                android:layout_marginEnd="12sp"
                 app:cardElevation="18sp"
                 android:layout_height="46sp">
                 <ImageView
@@ -54,6 +55,23 @@
                     android:src="@drawable/ic_baseline_notifications_active_24"
                     android:layout_height="24sp"
                     app:tint="@color/colorPrimary" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="46sp"
+                android:id="@+id/btnMyLocation"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="23sp"
+                android:layout_margin="20sp"
+                app:cardElevation="18sp"
+                android:layout_height="46sp">
+                <ImageView
+                    android:layout_width="24sp"
+                    android:layout_gravity="center"
+                    android:padding="2sp"
+                    android:src="@drawable/ic_baseline_my_location_24"
+                    android:layout_height="24sp"
+                    app:tint="@color/colorGrey600" />
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -164,21 +182,48 @@
 
             </com.google.android.material.card.MaterialCardView>
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="46sp"
-                android:id="@+id/btnMyLocation"
+                android:layout_width="match_parent"
+                android:id="@+id/cvFindTrucks"
+                app:cardElevation="5sp"
+                android:visibility="gone"
+                android:foreground="?selectableItemBackground"
+                tools:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:cardCornerRadius="23sp"
-                android:layout_margin="20sp"
-                app:cardElevation="8sp"
-                android:layout_height="46sp">
-                <ImageView
-                    android:layout_width="24sp"
-                    android:layout_gravity="center"
-                    android:padding="2sp"
-                    android:src="@drawable/ic_baseline_my_location_24"
-                    android:layout_height="24sp"
-                    app:tint="@color/colorGrey600" />
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:background="#ff6c0e"
+                    android:layout_height="75sp">
+                    <ImageView
+                        android:layout_width="45sp"
+                        android:id="@+id/ivTruck"
+                        android:background="@drawable/icon_truck_lines"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginStart="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:adjustViewBounds="true"
+                        android:layout_marginVertical="15sp"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="Find Trucks"
+                        style="@style/Text.B2"
+                        android:textSize="22sp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:background="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_height="28dp"
+                        android:layout_marginEnd="18sp"
+                        android:backgroundTint="@color/white"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

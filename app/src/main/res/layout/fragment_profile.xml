@@ -640,8 +640,8 @@
                             android:layout_height="32sp"
                             app:cardCornerRadius="16sp"
                             app:cardElevation="0dp"
-                            android:background="@color/colorRed"
-                            android:backgroundTint="@color/colorRed"
+                            android:background="@color/colorPrimary"
+                            android:backgroundTint="@color/colorPrimary"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -650,7 +650,7 @@
                                 android:padding="6dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@color/colorRed"
+                                android:background="@color/colorPrimary"
                                 android:src="@drawable/icon_logout"
                                 app:tint="@color/white" />
 
@@ -663,7 +663,7 @@
                             android:maxLines="1"
                             android:textSize="14dp"
                             android:text="Logout"
-                            android:textColor="@color/colorRed"
+                            android:textColor="@color/colorPrimary"
 
                             app:layout_constraintStart_toEndOf="@id/mcvLogout"
                             app:layout_constraintTop_toTopOf="parent"

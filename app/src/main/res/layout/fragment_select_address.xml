@@ -58,11 +58,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:id="@+id/cvSelectFromMap"
+            android:foreground="?selectableItemBackground"
             app:layout_constraintTop_toBottomOf="@id/cvSearch"
             android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="25sp"
-                android:layout_margin="16sp"
+                android:layout_marginHorizontal="16sp"
+                android:layout_marginVertical="20sp"
                 android:id="@+id/ivSelectFromMap"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -71,25 +73,31 @@
                 android:layout_height="25sp"/>
             <TextView
                 android:layout_width="wrap_content"
-                style="@style/Text.B3"
+                style="@style/Text.R3"
                 android:layout_marginStart="10sp"
                 android:foreground="?selectableItemBackground"
-                android:textColor="@color/colorGrey900"
+                android:textColor="@color/colorGrey700"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivSelectFromMap"
                 android:text="Select location from map"
                 android:layout_height="wrap_content"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/line1"
+            app:layout_constraintTop_toBottomOf="@id/cvSelectFromMap"
+            android:orientation="horizontal"
+            android:background="#E8E8E8"
+            android:layout_height="1sp"/>
         <TextView
             android:layout_width="match_parent"
             style="@style/Text.B3"
-            android:layout_marginStart="16sp"
+            android:layout_margin="16sp"
             android:textSize="15sp"
             android:textColor="@color/colorGrey900"
             android:id="@+id/tvFavAddressHeading"
-            app:layout_constraintTop_toBottomOf="@id/cvSelectFromMap"
+            app:layout_constraintTop_toBottomOf="@id/line1"
             android:text="Saved Addresses"
             android:layout_height="wrap_content"/>
         <androidx.recyclerview.widget.RecyclerView

@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Return money in shop"
-                android:textColor="@color/orangeRed"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -77,7 +77,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="@color/orangeRed"
+                android:backgroundTint="@color/colorPrimary"
                 android:paddingVertical="18dp"
                 app:iconGravity="textStart"
                 android:layout_marginTop="30dp"
