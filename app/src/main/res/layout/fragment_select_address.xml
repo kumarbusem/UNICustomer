@@ -88,11 +88,11 @@
             android:id="@+id/line1"
             app:layout_constraintTop_toBottomOf="@id/cvSelectFromMap"
             android:orientation="horizontal"
-            android:background="#E8E8E8"
+            android:background="#DADADA"
             android:layout_height="1sp"/>
         <TextView
             android:layout_width="match_parent"
-            style="@style/Text.B3"
+            style="@style/Text.M3"
             android:layout_margin="16sp"
             android:textSize="15sp"
             android:textColor="@color/colorGrey900"
@@ -111,7 +111,7 @@
             tools:listitem="@layout/item_recent_address" />
         <TextView
             android:layout_width="match_parent"
-            style="@style/Text.B3"
+            style="@style/Text.M3"
             android:layout_margin="16sp"
             android:textSize="15sp"
             android:textColor="@color/colorGrey900"

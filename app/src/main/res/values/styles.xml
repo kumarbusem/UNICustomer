@@ -85,6 +85,24 @@
         <item name="android:textSize">12dp</item>
     </style>
 
+    <style name="Text.M1" parent="AppTheme">
+        <item name="fontPath">fonts/WorkSans-Medium.ttf</item>
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/colorGrey500</item>
+    </style>
+
+    <style name="Text.M2" parent="Text.M1">
+        <item name="android:textSize">26dp</item>
+    </style>
+
+    <style name="Text.M3" parent="Text.M1">
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="Text.M4" parent="Text.M1">
+        <item name="android:textSize">12dp</item>
+    </style>
+
     <!--TABLET FONTS-->
 
 
