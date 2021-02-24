@@ -118,7 +118,7 @@ class HomeFragment : BaseAbstractFragment<HomeViewModel, FragmentHomeBinding>(R.
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return
         }
-        
+
         googleMap?.isMyLocationEnabled = false
         googleMap?.uiSettings?.isCompassEnabled = false
         googleMap?.uiSettings?.isMyLocationButtonEnabled = false

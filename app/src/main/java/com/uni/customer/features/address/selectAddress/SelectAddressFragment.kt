@@ -34,6 +34,10 @@ RecentAddressListAdapter.ItemSelectionCallback{
             layoutManager = LinearLayoutManager(requireContext())
             adapter = mAdapter
         }
+        rvFavAddressList.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = mAdapter
+        }
 
         ivBack.setOnClickListener { navigateBack() }
         initPlaceAutoComplete()
@@ -78,7 +82,6 @@ RecentAddressListAdapter.ItemSelectionCallback{
            } else {
                mAdapter.submitList(list.toMutableList())
            }
-
        })
     }
 

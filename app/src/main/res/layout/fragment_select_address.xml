@@ -18,6 +18,7 @@
         android:id="@+id/clProjectDetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:fitsSystemWindows="false">
 
         <com.google.android.material.card.MaterialCardView
@@ -53,6 +54,53 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:id="@+id/cvSelectFromMap"
+            app:layout_constraintTop_toBottomOf="@id/cvSearch"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="25sp"
+                android:layout_margin="16sp"
+                android:id="@+id/ivSelectFromMap"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/green_marker"
+                android:layout_height="25sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                style="@style/Text.B3"
+                android:layout_marginStart="10sp"
+                android:foreground="?selectableItemBackground"
+                android:textColor="@color/colorGrey900"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivSelectFromMap"
+                android:text="Select location from map"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            style="@style/Text.B3"
+            android:layout_marginStart="16sp"
+            android:textSize="15sp"
+            android:textColor="@color/colorGrey900"
+            android:id="@+id/tvFavAddressHeading"
+            app:layout_constraintTop_toBottomOf="@id/cvSelectFromMap"
+            android:text="Saved Addresses"
+            android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFavAddressList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadingEdge="vertical"
+            tools:itemCount="3"
+            app:layout_constraintTop_toBottomOf="@id/tvFavAddressHeading"
+            android:requiresFadingEdge="vertical"
+            tools:listitem="@layout/item_recent_address" />
         <TextView
             android:layout_width="match_parent"
             style="@style/Text.B3"
@@ -60,7 +108,7 @@
             android:textSize="15sp"
             android:textColor="@color/colorGrey900"
             android:id="@+id/tvRecentAddressHeading"
-            app:layout_constraintTop_toBottomOf="@id/cvSearch"
+            app:layout_constraintTop_toBottomOf="@id/rvFavAddressList"
             android:text="Recent Searches"
             android:layout_height="wrap_content"/>
         <androidx.recyclerview.widget.RecyclerView
