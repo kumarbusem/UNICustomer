@@ -13,7 +13,6 @@ import com.uni.data.roomDatabase.UNIRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import okhttp3.internal.applyConnectionSpec
 
 open class BaseViewModel(context: Application) : AndroidViewModel(context) {
 
@@ -33,7 +32,6 @@ open class BaseViewModel(context: Application) : AndroidViewModel(context) {
 
     val database by lazy { UNIRoomDatabase.getDatabase(context) }
     val repository by lazy { RecentAddressRepository(database.recentAddressDao()) }
-
 
 
 

@@ -1,8 +1,8 @@
-
 package com.uni.data.roomDatabase
+import com.uni.data.roomDatabase.RecentAddress
+import com.uni.data.roomDatabase.RecentAddressDao
 
 import androidx.annotation.WorkerThread
-import kotlinx.coroutines.flow.Flow
 
 class RecentAddressRepository(private val recentAddressDao: RecentAddressDao) {
 
