@@ -2,6 +2,7 @@ package com.uni.customer.features.address.selectAddress
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.libraries.places.api.model.Place
 import com.uni.customer.common.BaseViewModel

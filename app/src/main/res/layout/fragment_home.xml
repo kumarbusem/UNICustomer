@@ -186,6 +186,7 @@
                 android:id="@+id/cvFindTrucks"
                 app:cardElevation="5sp"
                 android:visibility="gone"
+                app:cardCornerRadius="0sp"
                 android:foreground="?selectableItemBackground"
                 tools:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
